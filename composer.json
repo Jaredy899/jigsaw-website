@@ -1,0 +1,10 @@
+{
+    "name": "jared/jigsaw-website",
+    "description": "Personal website built with Jigsaw",
+    "require": {
+        "tightenco/jigsaw": "^1.7"
+    },
+    "config": {
+        "optimize-autoloader": true
+    }
+}

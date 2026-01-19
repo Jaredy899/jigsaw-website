@@ -1,0 +1,16 @@
+{
+  "name": "jigsaw-website",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "vendor/bin/jigsaw serve",
+    "build": "vendor/bin/jigsaw build production",
+    "build:dev": "vendor/bin/jigsaw build",
+    "assets": "npx mix",
+    "assets:watch": "npx mix watch",
+    "preview": "vendor/bin/jigsaw build && cd build_local && php -S localhost:8000"
+  },
+  "devDependencies": {
+    "laravel-mix": "^6.0",
+    "highlight.js": "^11.9"
+  }
+}

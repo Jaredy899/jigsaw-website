@@ -1,0 +1,30 @@
+# Dependencies
+/vendor/
+/node_modules/
+
+# Build output
+/build_local/
+/build_production/
+/build_staging/
+
+# Mix output
+/source/assets/build/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Composer
+composer.lock
+
+# Bun
+bun.lockb
+
+# Laravel Mix
+mix-manifest.json
