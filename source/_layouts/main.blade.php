@@ -23,7 +23,6 @@
         
         /* Logo transition */
         .home-logo-container,
-        .logo-container,
         .header-logo {
             view-transition-name: jc-logo;
         }
