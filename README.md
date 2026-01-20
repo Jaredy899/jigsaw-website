@@ -77,6 +77,8 @@ draft: false
 
 ## Deployment
 
+### Traditional Static Hosting
+
 Build for production:
 
 ```bash
@@ -84,3 +86,68 @@ bun run build
 ```
 
 The static site will be generated in `build_production/` - deploy this folder to any static hosting service (Vercel, Netlify, GitHub Pages, etc.).
+
+### Docker Self-Hosting
+
+#### Quick Deploy (Recommended)
+
+Use the provided deployment script:
+
+```bash
+./deploy.sh
+```
+
+#### Manual Docker Commands
+
+Build and run with Docker:
+
+```bash
+# Build and start the container
+docker compose up --build -d
+
+# Or build the image manually
+docker build -t jigsaw-website .
+
+# Run the container
+docker run -p 8081:80 jigsaw-website
+```
+
+The site will be available at `http://localhost:8081`.
+
+#### Docker Commands
+
+```bash
+# Start in detached mode
+docker-compose up -d
+
+# Stop the container
+docker-compose down
+
+# Rebuild after changes
+docker-compose up --build --force-recreate
+
+# View logs
+docker-compose logs -f
+```
+
+#### Custom Configuration
+
+- **Port**: Change the port in `docker-compose.yml` (default: 8081)
+- **Domain**: Update `nginx.conf` server_name for custom domains
+- **SSL**: Add SSL certificates and update nginx config for HTTPS
+
+#### Updating Content
+
+If you make changes to the site content:
+
+```bash
+# Install dependencies (if not already done)
+composer install
+bun install
+
+# Build the updated site
+bun run build
+
+# Restart the Docker container to pick up changes
+docker compose down && docker compose up -d
+```
