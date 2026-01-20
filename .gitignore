@@ -4,7 +4,7 @@
 
 # Build output
 /build_local/
-/build_production/
+# /build_production/
 /build_staging/
 
 # Mix output
