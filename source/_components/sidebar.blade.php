@@ -48,7 +48,7 @@
                         @endphp
                         <li>
                             <a 
-                                href="{{ $post->getUrl() }}"
+                                href="{{ $post->getPath() }}"
                                 class="post-link"
                                 aria-label="{{ $post->title }} - Published on {{ $formattedDate }}"
                             >

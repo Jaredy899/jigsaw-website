@@ -28,3 +28,5 @@ bun.lockb
 
 # Laravel Mix
 mix-manifest.json
+.vercel
+.env*.local
