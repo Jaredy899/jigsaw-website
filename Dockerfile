@@ -5,13 +5,7 @@ FROM php:8.1-cli-alpine AS builder
 RUN apk add --no-cache \
     curl \
     git \
-    unzip \
-    nodejs \
-    npm
-
-# Install Bun
-RUN curl -fsSL https://bun.sh/install | sh
-ENV PATH="/root/.bun/bin:${PATH}"
+    unzip
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -21,19 +15,15 @@ WORKDIR /app
 
 # Copy dependency files
 COPY composer.json composer.lock ./
-COPY package.json bun.lock ./
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Install Node dependencies
-RUN bun install
-
 # Copy source files
 COPY . .
 
-# Build the site
-RUN bun run build
+# Build the site using Jigsaw
+RUN vendor/bin/jigsaw build production
 
 # Final stage: serve with nginx
 FROM nginx:alpine

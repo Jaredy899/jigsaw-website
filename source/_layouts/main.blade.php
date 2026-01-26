@@ -11,7 +11,7 @@
     <title>{{ $page->title ?? $page->siteName }}</title>
     <meta name="title" content="{{ $page->title ?? $page->siteName }}">
     <meta name="description" content="{{ $page->description ?? $page->siteDescription }}">
-    <link rel="stylesheet" href="/assets/build/css/main.css">
+    <link rel="stylesheet" href="/_assets/css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <meta name="view-transition" content="same-origin">
@@ -67,6 +67,6 @@
         @yield('content')
     </main>
     
-    <script src="/assets/build/js/main.js"></script>
+    <script src="/_assets/js/main.js"></script>
 </body>
 </html>
