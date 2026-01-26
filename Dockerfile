@@ -10,7 +10,7 @@ RUN apk add --no-cache \
     npm
 
 # Install Bun
-RUN curl -fsSL https://bun.sh/install | bash
+RUN curl -fsSL https://bun.sh/install | sh
 ENV PATH="/root/.bun/bin:${PATH}"
 
 # Install Composer
