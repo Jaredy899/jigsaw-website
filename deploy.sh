@@ -20,13 +20,8 @@ if [ ! -d "build_production" ] || [ ! "$(ls -A build_production)" ]; then
         composer install --no-dev --optimize-autoloader
     fi
 
-    if [ ! -d "node_modules" ]; then
-        echo "Installing Node.js dependencies..."
-        bun install
-    fi
-
     # Build the site
-    bun run build
+    vendor/bin/jigsaw build production
 fi
 
 # Start the Docker container

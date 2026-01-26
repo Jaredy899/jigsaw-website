@@ -6,7 +6,6 @@ A personal website built with [Jigsaw](https://jigsaw.tighten.com/), a static si
 
 - PHP 8.1+
 - Composer
-- Bun (or npm/yarn)
 
 ## Quick Start
 
@@ -14,11 +13,8 @@ A personal website built with [Jigsaw](https://jigsaw.tighten.com/), a static si
 # Install PHP dependencies
 composer install
 
-# Install frontend dependencies
-bun install
-
 # Start development server
-bun run dev
+vendor/bin/jigsaw serve
 ```
 
 The site will be available at `http://localhost:8000`.
@@ -27,12 +23,9 @@ The site will be available at `http://localhost:8000`.
 
 | Command | Description |
 |---------|-------------|
-| `bun run dev` | Start development server at localhost:8000 |
-| `bun run build` | Build for production (outputs to `build_production/`) |
-| `bun run build:dev` | Build for development (outputs to `build_local/`) |
-| `bun run assets` | Compile assets with Laravel Mix |
-| `bun run assets:watch` | Watch and compile assets |
-| `bun run preview` | Build and preview locally |
+| `vendor/bin/jigsaw serve` | Start development server at localhost:8000 |
+| `vendor/bin/jigsaw build production` | Build for production (outputs to `build_production/`) |
+| `vendor/bin/jigsaw build` | Build for development (outputs to `build_local/`) |
 
 ## Project Structure
 
@@ -82,7 +75,7 @@ draft: false
 Build for production:
 
 ```bash
-bun run build
+vendor/bin/jigsaw build production
 ```
 
 The static site will be generated in `build_production/` - deploy this folder to any static hosting service (Vercel, Netlify, GitHub Pages, etc.).
@@ -143,11 +136,40 @@ If you make changes to the site content:
 ```bash
 # Install dependencies (if not already done)
 composer install
-bun install
 
 # Build the updated site
-bun run build
+vendor/bin/jigsaw build production
 
 # Restart the Docker container to pick up changes
 docker compose down && docker compose up -d
 ```
+
+## How Jigsaw Works
+
+This site uses Jigsaw exclusively - no Node.js, npm, or build tools required. Here's how it works:
+
+### Static Assets
+
+Jigsaw automatically copies static files from the `source/` directory to the build output. CSS and JavaScript files in `source/_assets/` are served directly without compilation:
+
+- `source/_assets/css/main.css` → `build_production/_assets/css/main.css`
+- `source/_assets/js/main.js` → `build_production/_assets/js/main.js`
+
+### Collections
+
+Posts in `source/_posts/` are automatically processed as a collection. Jigsaw:
+- Reads frontmatter from each markdown file
+- Filters out drafts (`draft: false`)
+- Sorts by `pubDate` (newest first)
+- Generates clean URLs (removes date prefix)
+- Applies the `post` layout template
+
+### Building
+
+Jigsaw processes:
+1. **Blade templates** - PHP templating engine for layouts and components
+2. **Markdown files** - Blog posts with frontmatter
+3. **Static assets** - CSS, JS, images copied as-is
+4. **Collections** - Organized content (posts, pages, etc.)
+
+The build process is pure PHP - no compilation step needed for assets.
